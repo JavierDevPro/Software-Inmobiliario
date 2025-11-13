@@ -1,4 +1,4 @@
-namespace Software_Inmobiliario.Domain.Interface;
+namespace Software_Inmobiliario.Domain.Interfaces;
 
 public interface IRoleRepository
 {

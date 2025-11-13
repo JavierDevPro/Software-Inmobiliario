@@ -1,5 +1,6 @@
 using Software_Inmobiliario.Domain.Entities;
 
+namespace Software_Inmobiliario.Domain.Interfaces;
 public interface IUserRepository
 {
     Task<User> Create(User user);

@@ -1,4 +1,4 @@
-using Software_Inmobiliario.Domain.Interface;
+using Software_Inmobiliario.Domain.Interfaces;
 
 namespace Software_Inmobiliario.Applicationn.Services;
 

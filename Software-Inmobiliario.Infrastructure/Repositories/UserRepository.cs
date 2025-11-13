@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Software_Inmobiliario.Domain.Entities;
-using Software_Inmobiliario.Domain.Interface;
+using Software_Inmobiliario.Domain.Interfaces;
 using Software_Inmobiliario.Infrastructure.Data;
 
 namespace Software_Inmobiliario.Infrastructure.Repositories
