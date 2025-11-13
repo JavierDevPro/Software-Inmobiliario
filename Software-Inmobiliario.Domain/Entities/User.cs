@@ -8,7 +8,7 @@ public class User
     public string Name { get; set; }
     public string Email { get; set; }
     public string PasswordHash { get; set; }
-    public DateOnly RegistationDate { get; set; }
+    public DateOnly RegistrationDate { get; set; }
     public int RoleId { get; set; }
     [ForeignKey("RoleId")]
     public Role Role { get; set; }

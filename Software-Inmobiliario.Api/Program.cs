@@ -1,8 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using Software_Inmobiliario.Infrastructure.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+var connection = builder.Configuration.GetConnectionString("ConnectionDefault");
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseMySql(connection, MySqlServerVersion.AutoDetect(connection)));
+
 
 var app = builder.Build();
 
@@ -32,7 +41,7 @@ app.MapGet("/weatherforecast", () =>
     return forecast;
 })
 .WithName("GetWeatherForecast");
-
+app.MapControllers();
 app.Run();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
