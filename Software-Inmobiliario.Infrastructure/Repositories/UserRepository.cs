@@ -1,17 +1,27 @@
 using Microsoft.EntityFrameworkCore;
 using Software_Inmobiliario.Domain.Entities;
-using Software_Inmobiliario.Domain.Interfaces;
+using Software_Inmobiliario.Domain.Interface;
 using Software_Inmobiliario.Infrastructure.Data;
 
 namespace Software_Inmobiliario.Infrastructure.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly InmobiliariaContext _context;
+        private readonly AppDbContext _context;
 
-        public UserRepository(InmobiliariaContext context)
+        public UserRepository(AppDbContext context)
         {
             _context = context;
+        }
+
+        public Task<User> Create(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<User> GetUserByEmail(string email)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<User>> GetAllAsync()

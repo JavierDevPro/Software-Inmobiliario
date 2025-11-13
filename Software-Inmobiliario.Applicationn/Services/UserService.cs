@@ -1,5 +1,5 @@
 using Software_Inmobiliario.Domain.Entities;
-using Software_Inmobiliario.Domain.Interfaces;
+using Software_Inmobiliario.Domain.Interface;
 using Software_Inmobiliario.Application.Interfaces;
 
 namespace Software_Inmobiliario.Application.Services
@@ -25,8 +25,8 @@ namespace Software_Inmobiliario.Application.Services
 
         public async Task<User> CreateAsync(User user)
         {
-            user.RegistationDate = DateOnly.FromDateTime(DateTime.Now);
-            await _repository.AddAsync(user);
+            user.RegistrationDate = DateOnly.FromDateTime(DateTime.Now);
+            await _repository.Create(user);
             await _repository.SaveChangesAsync();
             return user;
         }
