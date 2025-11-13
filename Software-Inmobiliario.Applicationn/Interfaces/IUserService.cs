@@ -1,13 +1,12 @@
-using Software_Inmobiliario.Domain.Entities;
+using Software_Inmobiliario.Application.Dtos;
 
-namespace Software_Inmobiliario.Application.Interfaces
+namespace Software_Inmobiliario.Application.Interfaces;
+
+public interface IUserService
 {
-    public interface IUserService
-    {
-        Task<IEnumerable<User>> GetAllAsync();
-        Task<User?> GetByIdAsync(int id);
-        Task<User> CreateAsync(User user);
-        Task<User?> UpdateAsync(int id, User user);
-        Task<bool> DeleteAsync(int id);
-    }
+    Task<IEnumerable<UserDto>> GetAllAsync();
+    Task<UserDto?> GetByIdAsync(int id);
+    Task<UserDto> CreateAsync(CreateUserDto dto);
+    Task<UserDto?> UpdateAsync(int id, UpdateUserDto dto);
+    Task<bool> DeleteAsync(int id);
 }

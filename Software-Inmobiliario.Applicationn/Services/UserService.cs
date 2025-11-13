@@ -1,60 +1,39 @@
 using Software_Inmobiliario.Domain.Entities;
 using Software_Inmobiliario.Domain.Interfaces;
-using Software_Inmobiliario.Application.Interfaces;
 
-namespace Software_Inmobiliario.Application.Services
+namespace Software_Inmobiliario.Application.Services;
+
+public class UserService
 {
-    public class UserService : IUserService
+    private readonly IUserRepository _userRepository;
+
+    public UserService(IUserRepository userRepository)
     {
-        private readonly IUserRepository _repository;
+        _userRepository = userRepository;
+    }
 
-        public UserService(IUserRepository repository)
-        {
-            _repository = repository;
-        }
+    public async Task<IEnumerable<User>> GetAllUsersAsync()
+    {
+        return await _userRepository.GetAllAsync();
+    }
 
-        public async Task<IEnumerable<User>> GetAllAsync()
-        {
-            return await _repository.GetAllAsync();
-        }
+    public async Task<User?> GetUserByIdAsync(int id)
+    {
+        return await _userRepository.GetByIdAsync(id);
+    }
 
-        public async Task<User?> GetByIdAsync(int id)
-        {
-            return await _repository.GetByIdAsync(id);
-        }
+    public async Task AddUserAsync(User user)
+    {
+        await _userRepository.AddAsync(user);
+    }
 
-        public async Task<User> CreateAsync(User user)
-        {
-            user.RegistationDate = DateOnly.FromDateTime(DateTime.Now);
-            await _repository.AddAsync(user);
-            await _repository.SaveChangesAsync();
-            return user;
-        }
+    public async Task UpdateUserAsync(User user)
+    {
+        await _userRepository.UpdateAsync(user);
+    }
 
-        public async Task<User?> UpdateAsync(int id, User user)
-        {
-            var existing = await _repository.GetByIdAsync(id);
-            if (existing == null) return null;
-
-            existing.Name = user.Name;
-            existing.Email = user.Email;
-            existing.PasswordHash = user.PasswordHash;
-            existing.RoleId = user.RoleId;
-
-            await _repository.UpdateAsync(existing);
-            await _repository.SaveChangesAsync();
-
-            return existing;
-        }
-
-        public async Task<bool> DeleteAsync(int id)
-        {
-            var existing = await _repository.GetByIdAsync(id);
-            if (existing == null) return false;
-
-            await _repository.DeleteAsync(id);
-            await _repository.SaveChangesAsync();
-            return true;
-        }
+    public async Task DeleteUserAsync(int id)
+    {
+        await _userRepository.DeleteAsync(id);
     }
 }
