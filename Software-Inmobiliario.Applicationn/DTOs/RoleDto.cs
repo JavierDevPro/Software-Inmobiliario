@@ -1,6 +1,6 @@
 ﻿namespace Software_Inmobiliario.Applicationn;
 
-public class Class1
+public class RoleDto
 {
 
 }
