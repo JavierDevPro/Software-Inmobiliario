@@ -19,11 +19,12 @@ public class AuthService : IAuthService
     private readonly IRoleRepository _roleRepository;
     private readonly IMapper _mapper;
 
-    public AuthService(IUserRepository userRepository, IConfiguration configuration, IMapper mapper)
+    public AuthService(IUserRepository userRepository, IConfiguration configuration, IMapper mapper, IRoleRepository roleRepository)
     {
         _userRepository = userRepository;
         _configuration = configuration;
         _mapper = mapper;
+        _roleRepository = roleRepository;
     }
     
     public async Task<AuthResponseDto> Register(AuthRegisterDto authRegisterDto)
@@ -33,12 +34,12 @@ public class AuthService : IAuthService
 
         var user = _mapper.Map<User>(authRegisterDto);
         user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(authRegisterDto.Password);
-        user.RegistrationDate = DateOnly.FromDateTime(DateTime.Now);
+        user.RegistrationDate = DateOnly.FromDateTime(DateTime.UtcNow);
 
         var registered = await _userRepository.Create(user);
 
         var response = _mapper.Map<AuthResponseDto>(registered);
-        response.ExpiresAt = DateTime.Now.AddMinutes(15);
+        response.ExpiresAt = DateTime.UtcNow.AddMinutes(15);
         response.Role = await _roleRepository.GetRoleNameById(registered.RoleId);
 
         return response;
@@ -46,7 +47,9 @@ public class AuthService : IAuthService
 
     public async Task<AuthResponseDto> Login(AuthLoginDto authLoginDto)
     {
-        var user = await _userRepository.GetUserByEmail(authLoginDto.Password);
+        var user = await _userRepository.GetUserByEmail(authLoginDto.Email);
+        if (user == null) return null;
+        
         bool isPassValid = BCrypt.Net.BCrypt.Verify(authLoginDto.Password, user.PasswordHash);
 
         if (!isPassValid) return null;
