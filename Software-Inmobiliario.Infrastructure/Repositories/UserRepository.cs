@@ -14,6 +14,12 @@ namespace Software_Inmobiliario.Infrastructure.Repositories
             _context = context;
         }
 
+        public async Task<User> GetUserByEmail(string email)
+        {
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
+            return user;
+        }
+
         public async Task<IEnumerable<User>> GetAllAsync()
         {
             return await _context.Users
@@ -30,9 +36,10 @@ namespace Software_Inmobiliario.Infrastructure.Repositories
                 .FirstOrDefaultAsync(u => u.Id == id);
         }
 
-        public async Task AddAsync(User user)
+        public async Task<User> Create(User user)
         {
             await _context.Users.AddAsync(user);
+            return user;
         }
 
         public async Task UpdateAsync(User user)

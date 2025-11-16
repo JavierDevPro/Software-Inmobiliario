@@ -1,10 +1,12 @@
 using Software_Inmobiliario.Domain.Entities;
 using Software_Inmobiliario.Domain.Interfaces;
 using Software_Inmobiliario.Application.Interfaces;
+using Software_Inmobiliario.Applicationn.Interfaces;
+using IUserRepository = Software_Inmobiliario.Domain.Interfaces.IUserRepository;
 
 namespace Software_Inmobiliario.Application.Services
 {
-    public class UserService : IUserService
+    public class UserService : IUserServices
     {
         private readonly IUserRepository _repository;
 
