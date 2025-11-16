@@ -1,6 +1,6 @@
 using Software_Inmobiliario.Domain.Entities;
-using Software_Inmobiliario.Application.Interfaces;
 using Software_Inmobiliario.Domain.Interfaces;
+using Software_Inmobiliario.Application.Interfaces;
 
 namespace Software_Inmobiliario.Application.Services
 {

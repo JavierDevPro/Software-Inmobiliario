@@ -14,16 +14,6 @@ namespace Software_Inmobiliario.Infrastructure.Repositories
             _context = context;
         }
 
-        public Task<User> Create(User user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<User> GetUserByEmail(string email)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<IEnumerable<User>> GetAllAsync()
         {
             return await _context.Users
