@@ -8,6 +8,7 @@ using Software_Inmobiliario.Applicationn.Authentication;
 using Software_Inmobiliario.Applicationn.Interfaces;
 using Software_Inmobiliario.Applicationn.UserDtos;
 using Software_Inmobiliario.Domain.Entities;
+using Software_Inmobiliario.Domain.Interface;
 using Software_Inmobiliario.Domain.Interfaces;
 
 namespace Software_Inmobiliario.Applicationn.Services;

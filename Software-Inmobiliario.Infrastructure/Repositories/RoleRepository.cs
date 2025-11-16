@@ -27,7 +27,7 @@ public class RoleRepository : IRoleRepository
     
     public async Task<string?> GetRoleNameById(int id)
     {
-        var role = await Role.Roles.FirstOrDefaultAsync(r => r.Id == id);
+        var role = await _dbContext.Roles.FirstOrDefaultAsync(r => r.Id == id);
         return role.Name;
     }
 }
