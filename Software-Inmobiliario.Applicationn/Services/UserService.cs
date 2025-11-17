@@ -1,10 +1,12 @@
 using Software_Inmobiliario.Domain.Entities;
 using Software_Inmobiliario.Domain.Interfaces;
 using Software_Inmobiliario.Application.Interfaces;
+using Software_Inmobiliario.Applicationn.Interfaces;
+using IUserRepository = Software_Inmobiliario.Domain.Interfaces.IUserRepository;
 
 namespace Software_Inmobiliario.Application.Services
 {
-    public class UserService : IUserService
+    public class UserService : IUserServices
     {
         private readonly IUserRepository _repository;
 
@@ -25,8 +27,8 @@ namespace Software_Inmobiliario.Application.Services
 
         public async Task<User> CreateAsync(User user)
         {
-            user.RegistationDate = DateOnly.FromDateTime(DateTime.Now);
-            await _repository.AddAsync(user);
+            user.RegistrationDate = DateOnly.FromDateTime(DateTime.Now);
+            await _repository.Create(user);
             await _repository.SaveChangesAsync();
             return user;
         }
